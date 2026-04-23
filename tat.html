@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+/* cursor blink */
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background: white;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+/* fade in each word */
+.word {
+    opacity: 0;
+    display: inline-block;
+    margin-right: 6px;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(10px); }
+}
+
+/* floating hearts */
+.heart {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: red;
+    transform: rotate(45deg);
+    animation: float 5s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart::before { top: -7px; left: 0; }
+.heart::after { left: -7px; top: 0; }
+
+@keyframes float {
+    0% { bottom: -20px; opacity: 1; }
+    100% { bottom: 100%; opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="text"></div><span class="cursor"></span>
+
+<script>
+// EXACT TEXT (word by word)
+const text = `And it's great
+to know that there is
+someone who cares with a closeness
+unlike any other
+i'm lucky to have a sister like you
+
+💖 BYE BYE bhutki 💖`;
+
+const container = document.getElementById("text");
+
+// split words but preserve line breaks
+const lines = text.split("\n");
+let lineIndex = 0;
+let wordIndex = 0;
+
+function typeWord() {
+    if (lineIndex < lines.length) {
+        const words = lines[lineIndex].split(" ");
+
+        if (wordIndex < words.length) {
+            const span = document.createElement("span");
+            span.className = "word";
+            span.textContent = words[wordIndex];
+            container.appendChild(span);
+
+            wordIndex++;
+            setTimeout(typeWord, 250);
+        } else {
+            container.appendChild(document.createElement("br"));
+            lineIndex++;
+            wordIndex = 0;
+            setTimeout(typeWord, 400);
+        }
+    }
+}
+
+typeWord();
+
+// floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(() => {
+    if (document.querySelectorAll(".heart").length < 25) {
+        createHeart();
+    }
+}, 300);
+</script>
+
+</body>
+</html>
