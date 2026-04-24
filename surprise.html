@@ -2,49 +2,70 @@
 <html>
 <head>
 <title>Surprise 💝</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-    margin:0;
-    
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    flex-direction:column;
-    color:rgb(177, 16, 16);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    color: rgb(177, 16, 16);
     font-family: Arial;
-     background-image: url(img.jpg);
+    background: url("img.jpg");
     background-size: cover;
+    background-position: center;
 }
 
+/* video styling */
 video {
     width: 80%;
     max-width: 500px;
     border-radius: 20px;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
+
+/* button */
 button {
-    padding:10px 20px;
-    font-size:18px;
-    background:red;
-    color:white;
-    border:none;
-    cursor:pointer;
+    padding: 10px 20px;
+    font-size: 18px;
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h1>💖 Happy Raksha Bandhan Sister 💖</h1>
+<h1>💖 Happy Raksha Bandhan 💖</h1>
 
-<video controls autoplay>
+<!-- ❌ removed autoplay -->
+<video id="myVideo" controls>
     <source src="video.mp4" type="video/mp4">
 </video>
+
 <br><br><br>
+
 <button onclick="openPage()">press here 🎉</button>
+
 <script>
+// delay video play by 1 second
+window.onload = function () {
+    const video = document.getElementById("myVideo");
+
+    setTimeout(() => {
+        video.style.opacity = 1;
+        video.play().catch(e => console.log("Autoplay blocked:", e));
+    }, 1000);
+};
+
+// next page
 function openPage() {
     window.open("tat.html", "_blank");
 }
