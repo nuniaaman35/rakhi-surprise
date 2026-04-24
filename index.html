@@ -2,28 +2,43 @@
 <html>
 <head>
 <title>Happy Raksha Bandhan 💝</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
-    text-align:center;
+    text-align: center;
     font-family: Arial;
-    background-image: url(img.jpg);
+    background: url("img.jpg");
     background-size: cover;
-    
+    background-position: center;
+    min-height: 100vh;
+    margin: 0;
+   
 }
 
-
-
-button {
-    padding:10px 20px;
-    font-size:18px;
-    background:red;
-    color:white;
-    border:none;
-    cursor:pointer;
-}
 h1 {
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: rgb(216, 17, 17);
+    margin-top: 100px;
+}
+
+h2 {
+    color: white;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: darkred;
 }
 </style>
 </head>
@@ -31,16 +46,29 @@ h1 {
 <body>
 
 <h1>It's for you Priyanka (Di) 🎁</h1>
-<h2> 💖💖💖💖💖💖💖</h2>
-
+<h2>💖💖💖💖💖💖💖</h2>
 
 <br><br>
 
-<button onclick="openPage()">Click for Surprise 🎉</button>
+<button onclick="playSoundAndOpen()">Click for Surprise 🎉</button>
+
+<!-- ✅ AUDIO (correct placement) -->
+<audio id="clickSound" preload="auto">
+    <source src="sound.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-function openPage() {
-    window.open("surprise.html", "_blank");
+function playSoundAndOpen() {
+    const audio = document.getElementById("clickSound");
+
+    // play sound
+    audio.currentTime = 0;
+    audio.play().catch(e => console.log("Audio error:", e));
+
+    // open next page after slight delay
+    setTimeout(() => {
+        window.open("surprise.html", "_blank");
+    }, 1500);
 }
 </script>
 
